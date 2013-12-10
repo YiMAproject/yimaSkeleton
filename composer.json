@@ -1,0 +1,39 @@
+{
+    "name": "rayamedia/skeleton-zf2app",
+    "description": "Yima Skeleton Application Based On ZF2.",
+    "keywords": [
+        "application framework",
+        "zf2",
+        "yima",
+        "raya media"
+    ],
+    "authors": [
+        {
+            "name": "Payam Naderi",
+            "email": "naderi.payam@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev":
+    {
+        "zendframework/zendframework": "2.2.4"
+    },
+    "minimum-stability": "dev",
+    "suggest": {
+        "zendframework/zend-developer-tools": "Module for developer and debug tools for working with the ZF2 MVC layer.",
+        "jhuet/zdt-logger-module": "A ZF2 module to log data using Zend\\Log and write them to ZendDeveloperTools toolbar."
+    },
+    "config":
+    {
+	    "vendor-dir": "_app/vendor",
+	    "bin-dir"   : "_app/vendor/bin"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.raya-media.com/"
+        }
+    ]
+}

@@ -1,0 +1,93 @@
+<?php
+/**
+ * What this file actually does ?!!
+ *
+ * This is very first level configuration file that
+ * given to app. to start the engine.
+ *
+ * Desc :
+ * X1) This file present as a "ApplicationConfig" service on serviceManager
+ *    serviceManager->get('ApplicationConfig');
+ *
+ */
+return array(
+    /* X1: every key present here can fetch later */
+	'db' => array(
+		'prefix' => '',
+	),
+
+    # ----------------------------------------------------
+
+    /**
+     * This way you can register some service (factory, invokable, ..)
+     * to serviceManager.
+     *
+     * also change default behavior of program for ModuleManager, EventManager
+     * by registering new one instead serviceManager defaults.
+     *
+     * @see \Zend\Mvc\Service\ServiceManagerConfig
+     */
+    'service_manager' => array(
+        'factories' => array (
+            // just for study case reason ...
+
+            // you can replace application startup or default ServiceManagerConfig with your own services
+            'ModuleManager' => 'Zend\Mvc\Service\ModuleManagerFactory', // default
+
+            /* used by default Module Manager
+             *
+             * > by default containing all services for serviceManager and
+             *   using during running app. Controllers, view, and more more ...
+             *
+             * > serviceListener listen for Module.php and load some config file
+             *   by execute related method and get some config.
+             *   you can register some by "service_listener_options" key
+             *
+             * > attached to eventManager by default
+             *   setDefaultConfig catched from within modules
+             *   for services that present to listener
+             */
+            'ServiceListener' => 'Zend\Mvc\Service\ServiceListenerFactory', // default
+        ),
+    ),
+    # ----------------------------------------------------
+
+	# modules name that used in application must list here
+	'modules' => array(
+        'Application',
+	),
+
+
+    /**
+     * Used by default Module Manager,
+     *
+     * DefaultListenerAggregate will use it.
+     * DefaultListenerAggregate setup eventManager for LoadingModules
+     */
+    'module_listener_options' => array(
+		'module_paths' => array(
+			APP_DIR_CORE,
+			APP_DIR_MODULES,
+		),
+		'config_glob_paths'    => array(
+			# in file haa bar asaase tartib e gharaar giri include mishavand
+			APP_DIR_CONFIG .DS. 'modules.global.config.php',
+            APP_DIR_CONFIG .DS. '{,*.}{global,local}.php',
+			APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. 'modules.override.config.php',
+            APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. '{,*.}{global,local}.php',
+        ),
+		# caching modules merged config
+		'config_cache_enabled'  => false,
+		'cache_dir'    		   	=> APP_DIR_CACHE,
+		'config_cache_key' 	    => 'modulesMergedConfig_'.APP_HOST, // name of cache file
+		
+		# also these options can beign set
+		/* 
+		'config_static_paths'  => array(
+			
+		),
+		'extra_config'         => array(
+		),
+		*/
+	),
+);
