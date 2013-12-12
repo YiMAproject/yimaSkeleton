@@ -10,6 +10,8 @@ composer.lock
 nbproject
 tmp/
 _app/vendor/**
+_app/core/**
+!_app/core/Application
 
 # Default Vendor Libraries (not composer) #
 ###########################################
