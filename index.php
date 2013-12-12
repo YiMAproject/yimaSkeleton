@@ -39,7 +39,7 @@ try {
 	define('APP_HOST',$hostName);
 
 	// try to reach host specific config
-	$defaultConf = \Raya\Appwork\Config\Config::getAppConfFromFile();
+	$defaultConf = \YimaBase\Config\Config::getAppConfFromFile();
 
 	// run application
 	Zend\Mvc\Application::init($defaultConf)->run();

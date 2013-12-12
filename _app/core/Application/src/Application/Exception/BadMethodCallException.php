@@ -1,5 +1,5 @@
 <?php
-namespace Raya\Appwork\Exception;
+namespace Application\Exception;
 
 class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
 {

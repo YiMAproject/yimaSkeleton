@@ -1,7 +1,7 @@
 <?php
-namespace Raya\Appwork\Db\TableGateway;
+namespace Application\Db\TableGateway;
 
-use Raya\Appwork\Db\TableGateway\AbstractTableGateway;
+use Application\Db\TableGateway\AbstractTableGateway;
 
 class Dms extends AbstractTableGateway
 {

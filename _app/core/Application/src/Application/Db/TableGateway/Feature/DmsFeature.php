@@ -23,15 +23,15 @@ FROM `sampletable` AS `mt`
 WHERE `bt`.`sampletable_id` =1
  */
 
-namespace Raya\Appwork\Db\TableGateway\Feature;
+namespace Application\Db\TableGateway\Feature;
 
-use Raya\Appwork\Db\TableGateway\Dms as DmsTable;
+use Application\Db\TableGateway\Dms as DmsTable;
 use Zend\Db\TableGateway\Feature\AbstractFeature;
 use Zend\Db\TableGateway\Exception;
 use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\Db\Metadata\Metadata;
 use Zend\Db\Sql\Expression;
-use Raya\Appwork\Db\TableGateway\Provider\PrimaryKeyProviderInterface;
+use Application\Db\TableGateway\Provider\PrimaryKeyProviderInterface;
 
 class DmsFeature extends AbstractFeature
 {
@@ -45,7 +45,7 @@ class DmsFeature extends AbstractFeature
 	/**
 	 * Service e table-i- ke dms field haa ro negah midaarad
 	 *
-	 * @var Raya\Appwork\Db\TableGateway\AbstractTableGateway
+	 * @var Application\Db\TableGateway\AbstractTableGateway
 	 */
 	protected $dmsTable;
 	

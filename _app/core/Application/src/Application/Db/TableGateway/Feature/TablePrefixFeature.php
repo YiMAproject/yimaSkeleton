@@ -1,5 +1,5 @@
 <?php
-namespace Raya\Appwork\Db\TableGateway\Feature;
+namespace Application\Db\TableGateway\Feature;
 
 use Zend\Db\TableGateway\Feature\AbstractFeature;
 use Zend\Db\TableGateway\Exception;
@@ -33,7 +33,7 @@ class TablePrefixFeature extends AbstractFeature
 			return $this->canonicalPrefix;
 		}
 		
-		$defaultConf = \Raya\Appwork\Config\Config::getAppConfFromFile();
+		$defaultConf = \YimaBase\Config\Config::getAppConfFromFile();
 		
 		$prefix = (isset($defaultConf['db']['prefix'])) ? $defaultConf['db']['prefix'] : '';
 		$prefix = $this->canonicalizePrefix($prefix);

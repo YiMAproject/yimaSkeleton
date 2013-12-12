@@ -1,13 +1,13 @@
 <?php
-namespace Raya\Appwork\Db\TableGateway;
+namespace Application\Db\TableGateway;
 
-use Raya\Appwork\Db\TableGateway\Feature\TablePrefixFeature;
-use Raya\Appwork\Db\TableGateway\Exception;
+use Application\Db\TableGateway\Feature\TablePrefixFeature;
+use Application\Db\TableGateway\Exception;
 use Zend\Db\TableGateway\AbstractTableGateway as ZendTableAbstract;
 use Zend\Db\TableGateway\Feature;
 
 use Zend\Db\Adapter\Adapter;
-use Raya\Appwork\Db\TableGateway\Provider\PrimaryKeyProviderInterface;
+use Application\Db\TableGateway\Provider\PrimaryKeyProviderInterface;
 
 class AbstractTableGateway extends ZendTableAbstract implements 
 	\Zend\Db\Adapter\AdapterAwareInterface,	 # using global adapter when service invoked
@@ -84,7 +84,7 @@ class AbstractTableGateway extends ZendTableAbstract implements
     		return $this->canonicalPrefix;
     	}
     
-    	$defaultConf = \Raya\Appwork\Config\Config::getAppConfFromFile();
+    	$defaultConf = \YimaBase\Config\Config::getAppConfFromFile();
     
     	$prefix = (isset($defaultConf['db']['prefix'])) ? $defaultConf['db']['prefix'] : '';
     	$prefix = $this->canonicalizePrefix($prefix);
@@ -104,7 +104,7 @@ class AbstractTableGateway extends ZendTableAbstract implements
     /**
      * @note Ehtemaal daarad be dalil e "Visibility from other objects" dar 
      * table haaii ke feature e globalAdapter raa daarad dochar e moshkel shavim
-     * @see Raya\Appwork\Db\TableGateway\Feature\TablePrefixFeature
+     * @see Application\Db\TableGateway\Feature\TablePrefixFeature
      *  
      * @see \Zend\Db\Adapter\AdapterAwareInterface::setDbAdapter()
      */

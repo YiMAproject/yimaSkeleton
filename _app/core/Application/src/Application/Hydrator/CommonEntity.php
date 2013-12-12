@@ -1,8 +1,8 @@
 <?php
-namespace Raya\Appwork\Hydrator;
+namespace Application\Hydrator;
 
 use Zend\Stdlib\Hydrator\AbstractHydrator;
-use Raya\Appwork\Exception;
+use Application\Exception;
 
 class CommonEntity extends AbstractHydrator
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Raya\Appwork\Db\TableGateway\Provider;
+namespace Application\Db\TableGateway\Provider;
 
 interface PrimaryKeyProviderInterface
 {

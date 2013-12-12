@@ -1,5 +1,5 @@
 <?php
-namespace Raya\Appwork\Db\TableGateway\Exception;
+namespace Application\Db\TableGateway\Exception;
 
 class InvalidFeatureException extends \Exception
 {
