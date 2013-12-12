@@ -14,7 +14,7 @@ _app/vendor/**
 # Default Vendor Libraries (not composer) #
 ###########################################
 !_app/vendor/Datasecurity
-!_app/vendor/rayamedia
+!_app/vendor/rayamedia/Raya/Appwork
 !_app/vendor/xSampleClassmapSingle
 !_app/vendor/xSampleNamespace
 !_app/vendor/*.php
