@@ -1,11 +1,11 @@
 <?php
 /**
- * Autoloading no composer libraries, defined to such
- * below files
+ * Autoloading no composer libraries,
+ * defined to such below files
  */
 $map      = require 'autoload_namespaces.php';
-$classMap = require 'autoload_classmap.php';
 $prefixes = require 'autoload_prefixes.php';
+$classMap = require 'autoload_classmap.php';
 
 Zend\Loader\AutoloaderFactory::factory(
 	array(

@@ -1,5 +1,4 @@
 <?php
-
 // Define Consts
 require 'indefine.php';
 
@@ -17,20 +16,13 @@ if (file_exists(APP_DIR_LIBRARIES .DS. 'startup.php')) {
 
 // Run the application!
 try {
-	// Get host name and set as const
-	$config = include APP_DIR_CONFIG .DS. 'application.domains.config.php';
-
-	$hostName = $_SERVER['SERVER_NAME'];
-	$hostName = (substr($hostName, 0, 3) == 'www') ? substr($hostName, 4) : $hostName;
-	if (! isset($config['domains'][$hostName]) ) {
-		while (isset($config['domains']['canonical_domains'][$hostName])) {
-			$hostName = $config['domains']['canonical_domains'][$hostName];
-		}
-	}
-	define('APP_HOST',$hostName);
-
 	// try to reach host specific config
-	$defaultConf = \YimaBase\Config\Config::getAppConfFromFile();
+    $defaultConf = include  APP_DIR_CONFIG .DS. 'application.global.config.php';
+    $hostConFile = APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. 'application.override.config.php';
+    if (file_exists($hostConFile)) {
+        $hostConf = include $hostConFile;
+        $defaultConf = array_merge($defaultConf, $hostConf);
+    }
 
 	// run application
 	Zend\Mvc\Application::init($defaultConf)->run();
