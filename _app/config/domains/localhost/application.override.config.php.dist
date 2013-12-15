@@ -1,0 +1,15 @@
+<?php
+/**
+ * Merged with application.global.config.php values
+ * at very first application run on index.php
+ *
+ * Note: this config not merged with global config on equal keys
+ *       but fully replaced.
+ */
+return array(
+    'modules' => array(
+        'Application',    // in reason of top note, you must enter full list of modules -
+                          //  including Application as well
+        'SkeletonModule',
+    ),
+);

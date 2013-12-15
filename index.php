@@ -17,10 +17,12 @@ if (file_exists(APP_DIR_LIBRARIES .DS. 'startup.php')) {
 // Run the application!
 try {
 	// try to reach host specific config
-    $defaultConf = include  APP_DIR_CONFIG .DS. 'application.global.config.php';
-    $hostConFile = APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. 'application.override.config.php';
-    if (file_exists($hostConFile)) {
-        $hostConf = include $hostConFile;
+    $defaultConf = include  APP_DIR_CONFIG .DS. 'application.config.php';
+
+    $domainConfFiles = APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. 'application.override.{,local.}config.php';
+    foreach (glob($domainConfFiles, GLOB_BRACE) as $file) {
+        // merge with default config
+        $hostConf = include $file;
         $defaultConf = array_merge($defaultConf, $hostConf);
     }
 

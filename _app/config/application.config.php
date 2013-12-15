@@ -57,6 +57,10 @@ return array(
         'Application',
 	),
 
+    // ---------------------
+    // DON`T EDIT LINES BELOW
+    // if you want some changes override configs by domain spec file
+    // ===========================
 
     /**
      * Used by default Module Manager,
@@ -71,9 +75,9 @@ return array(
 		),
 		'config_glob_paths'    => array(
 			# in file haa bar asaase tartib e gharaar giri include mishavand
-			APP_DIR_CONFIG .DS. 'modules.global.config.php',
+			APP_DIR_CONFIG .DS. 'modules.{,local.}config.php',
             APP_DIR_CONFIG .DS. '{,*.}{global,local}.php',
-			APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. 'modules.override.config.php',
+			APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. 'modules.override.{,local.}config.php',
             APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. '{,*.}{global,local}.php',
         ),
 		# caching modules merged config

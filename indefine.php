@@ -18,7 +18,7 @@ define('APP_DIR_TEMP', 			APP_DIR_APPLICATION .DS. 'tmp');
 define('APP_DIR_CACHE', 			APP_DIR_TEMP .DS. 'cache');
 
 // Get host name and define as global const {
-$config = include APP_DIR_CONFIG .DS. 'application.domains.config.php';
+$config = include APP_DIR_CONFIG .DS. 'application.domains.php';
 
 $hostName = (PHP_SAPI != 'cli') ? $_SERVER['SERVER_NAME'] : 'localhost';
 $hostName = (substr($hostName, 0, 3) == 'www') ? substr($hostName, 4) : $hostName;

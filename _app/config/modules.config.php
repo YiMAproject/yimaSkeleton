@@ -2,8 +2,8 @@
 /**
  * Global Configuration Override
  *
- * This file has been born to application from application
- * config "module_listener_options" see application config for more...
+ * This file has been born to application from application config file (application.global.config)
+ * "module_listener_options" see application config for more...
  *
  * Used in default moduleManager / ConfigListener during loadModules
  *

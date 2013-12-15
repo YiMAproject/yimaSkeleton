@@ -1,0 +1,6 @@
+<?php
+return array(
+    'sample_conf' => array(
+        'key' => 'value',
+    ),
+);

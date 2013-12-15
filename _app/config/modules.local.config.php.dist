@@ -1,0 +1,17 @@
+<?php
+/**
+ * You can have this file aside modules.config.php
+ * and merged after that.
+ *
+ * @NOTE: This file is ignored from Git by default with the .gitignore
+ * This is a good practice, as it prevents sensitive
+ * credentials from accidentally being comitted into version control.
+ */
+return array(
+    'db' => array(
+        'driver'         => 'Pdo',
+        'driver_options' => array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+        ),
+    ),
+);
