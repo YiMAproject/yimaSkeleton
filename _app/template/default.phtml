@@ -3,7 +3,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+    <?php
+    echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))
+        ->setSeparator(' - ')
+        ->setAutoEscape(false);
+    ?>
 
     <?php echo $this->headMeta()
         ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -16,20 +20,24 @@
         array(
             'rel' => 'shortcut icon',
             'type' => 'image/vnd.microsoft.icon',
-            'href' => $this->staticServer('Application\Default\Theme') . '/img/favicon.ico'
+            // get YiMa favicon from server basePath (not template)
+            // default pathName is BasePath
+            'href' => $this->staticUri() . 'favicon.ico'
         )
     )
-    ->prependStylesheet($this->staticServer() . '/css/style.css')
-    ->prependStylesheet($this->staticServer() . '/css/bootstrap-theme.min.css')
-    ->prependStylesheet($this->staticServer() . '/css/bootstrap.min.css')
+    // change url as defined in pathName "Application\Default\Theme" (by config)
+    ->prependStylesheet($this->staticUri('Application\Default\Theme') . '/css/style.css')
+    // continue as is ... (Application\Default\Theme)
+    ->prependStylesheet($this->staticUri() . '/css/bootstrap-theme.min.css')
+    ->prependStylesheet($this->staticUri() . '/css/bootstrap.min.css')
     ?>
 
     <!-- Scripts -->
     <?php echo $this->headScript()
-        ->prependFile($this->staticServer() . '/js/bootstrap.min.js')
-        ->prependFile($this->staticServer() . '/js/jquery.min.js')
-        ->prependFile($this->staticServer() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
-        ->prependFile($this->staticServer() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
+        ->prependFile($this->staticUri() . '/js/bootstrap.min.js')
+        ->prependFile($this->staticUri() . '/js/jquery.min.js')
+        ->prependFile($this->staticUri() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+        ->prependFile($this->staticUri() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
     ; ?>
 
 </head>
@@ -42,7 +50,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->staticServer('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
+            <a class="navbar-brand" href="<?php echo $this->url('home') ?>">
+                <img
+                    src="<?php echo $this->staticUri().'/img/zf2-logo.png'; ?>"
+                    alt="Zend Framework 2"
+                />
+                &nbsp;<?php echo $this->translate('Skeleton Application') ?>
+            </a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -52,11 +66,23 @@
     </div>
 </nav>
 <div class="container">
-    <?php $this->staticServer(false); //reset to basePath()?>
+    <?php $this->staticUri('BasePath'); //reset to basePath()?>
     <?php echo $this->content; ?>
     <hr>
     <footer>
-        <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+        <?php
+        $rayaServer = 'raya-media.com';
+        // here we pass an direct uri (not registered pathname) and try to assemble that
+        // you can use this format ($var) in your defined pathname uri
+        $this->staticUri('self')
+            ->setPath('ondemand/rayamedia/server', '$protocol://raya-media.com');
+        ?>
+        <p>
+            <a href="<?php echo $this->staticUri('http://crm.$rayaServer/$user', $rayaServer, APP_HOST); ?>">Signin</a>
+            To Your CRM Panel On
+            <a href="<?php echo $this->staticUri('ondemand/rayamedia/server', array('protocol' => 'http')); ?>">RayaMedia</a>
+            Server.
+        </p>
     </footer>
 </div> <!-- /container -->
 <?php echo $this->inlineScript() ?>

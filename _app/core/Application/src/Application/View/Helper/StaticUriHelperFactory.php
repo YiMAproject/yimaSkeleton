@@ -1,23 +1,21 @@
 <?php
-namespace Application\Service\View;
+namespace Application\View\Helper;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-use Application\View\Helper\StaticServer;
-
-class StaticServerHelperFactory implements FactoryInterface
+class StaticUriHelperFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $serviceManager = $serviceLocator->getServiceLocator();
 
         $conf     = $serviceManager->get('Config');
-        $conf     = ( isset($conf['static_server']) && is_array($conf['static_server']) )
-                  ? $conf['static_server']
+        $conf     = ( isset($conf['static_uri_helper']) && is_array($conf['static_uri_helper']) )
+                  ? $conf['static_uri_helper']
                   : array();
 
-        $stServer = new StaticServer($conf);
+        $stServer = new StaticUri($conf);
 
         return $stServer;
     }

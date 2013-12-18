@@ -22,8 +22,15 @@ namespace YimaBase\Config;
 class Config
 {
 	protected static $conf;
-	
-	public static function getAppConfFromFile($host)
+
+    /**
+     * @deprecated
+     *
+     * @param $host
+     * @return array|mixed
+     * @throws \Exception
+     */
+    public static function getAppConfFromFile($host)
 	{
 		if (isset(self::$conf)) {
 			return self::$conf;

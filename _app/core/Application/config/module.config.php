@@ -21,7 +21,7 @@ return array(
         ),
     ),
 
-    'static_server' => array(
+    'static_uri_helper' => array(
         'Application\Default\Theme' => '//raya-media.com/cd/zendSkeleton/',
     ),
 
@@ -71,7 +71,7 @@ return array(
         ),
     ),
 	
-	# translation enabled by text-domain speccialy use for this module
+	# translation enabled by text-domain defined to use for this module
 	'translator' => array(
 		'translation_file_patterns' => array(
 			array(

@@ -47,7 +47,7 @@ class Module
     {
         return array(
             'factories' => array (
-                'staticServer'   => 'Application\Service\View\StaticServerHelperFactory',
+                'staticUri'   => 'Application\View\Helper\StaticUriHelperFactory',
             ),
         );
     }
