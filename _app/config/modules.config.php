@@ -29,7 +29,7 @@ return array(
 
         'template_map'			    => array(), 		// used as construct parameter for ViewResolver\TemplateMapResolver($map)
         'template_path_stack'		=> array(			// used as ->addPaths() method on ViewResolver\TemplatePathStack()
-            APP_DIR_APPLICATION .DS. 'template',
+            APP_DIR_APPLICATION .DS. 'themes',
         ),
 
         'layout' 					=> 'default', 		// default value is 'layouy/layout' by ViewManager
