@@ -43,15 +43,6 @@ class Module
     	);
     }
 
-    public function getViewHelperConfig()
-    {
-        return array(
-            'factories' => array (
-                'staticUri'   => 'Application\View\Helper\StaticUriHelperFactory',
-            ),
-        );
-    }
-
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';

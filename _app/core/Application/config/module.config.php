@@ -21,10 +21,6 @@ return array(
         ),
     ),
 
-    'static_uri_helper' => array(
-        'Application\Default\Theme' => '//raya-media.com/cd/zendSkeleton/',
-    ),
-
     'router' => array(
         'routes' => array(
         	# application Home Page

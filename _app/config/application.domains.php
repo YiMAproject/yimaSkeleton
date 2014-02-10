@@ -12,7 +12,8 @@ return array(
 
 		'canonical_domains'=> array (
             // canonical domain names, means 127.0.0.1 is equal to localhost
-			'127.0.0.1' => 'localhost',
+			'127.0.0.1'      => 'localhost',
+            'raya-media.com' => 'localhost',
 		),
 	),
 );
