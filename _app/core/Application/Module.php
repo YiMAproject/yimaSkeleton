@@ -17,16 +17,6 @@ class Module
 		$sl = $e->getApplication()->getServiceManager();
 		$adapter = $sl->get('Zend\Db\Adapter\Adapter');
 		GlobalAdapterFeature::setStaticAdapter($adapter);
-
-
-        /* --- To Avoid error if intl extension not installed on server. --- */
-
-        /**
-         * @TODO: grab default locale from anywhere and set here ..
-         */
-        // used by ViewHelpers and ... (mvc), exp. $this->translate()
-        $translator = $sl->get('MvcTranslator');
-        $translator->setLocale('en_US');
 	}
 	
     public function getServiceConfig() 
@@ -36,7 +26,9 @@ class Module
     		'initializers' => array (
     			function ($instance, $sm) {
     				if ($instance instanceof \Zend\Db\Adapter\AdapterAwareInterface) {
-    					$instance->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+    					$instance->setDbAdapter(
+                            $sm->get('Zend\Db\Adapter\Adapter')
+                        );
     				}
     			}
     		), 

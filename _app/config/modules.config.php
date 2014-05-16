@@ -42,6 +42,9 @@ return array(
         'factories' => array(
             'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
         ),
+        'aliases' => array(
+            'db.adapter' => 'Zend\Db\Adapter\Adapter',
+        ),
     ),
 
     'db' => array(
