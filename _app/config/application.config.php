@@ -13,6 +13,7 @@
 return array(
     # modules name that used in application must list here
     'modules' => array(
+        'AssetManager',
         'Application',
     ),
 
@@ -73,12 +74,14 @@ return array(
 			APP_DIR_CORE,
 			APP_DIR_MODULES,
 		),
-		'config_glob_paths'    => array(
-			# in file haa bar asaase tartib e gharaar giri include mishavand
-			APP_DIR_CONFIG .DS. 'modules.{,local.}config.php',
+        'config_glob_paths'    => array(
+            # in file haa bar asaase tartib e gharaar giri include mishavand
+            APP_DIR_CONFIG .DS. 'modules.{,local.}config.php',
             APP_DIR_CONFIG .DS. '{,*.}{global,local}.php',
-			APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. 'modules.override.{,local.}config.php',
+            APP_DIR_CONFIG .DS. '{,*.}{,*.}{global.,local.}config.php',
+            APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. 'modules.override.{,local.}config.php',
             APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. '{,*.}{global,local}.php',
+            APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. '{,*.}{,*.}{global.,local.}config.php',
         ),
 		# caching modules merged config
 		'config_cache_enabled'  => false,

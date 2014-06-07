@@ -47,6 +47,15 @@ return array(
         ),
     ),
 
+    'asset_manager' => array(
+        'resolver_configs' => array(
+            'paths' => array(
+                # Assetic for default template files
+                APP_DIR_APPLICATION.DS.'themes'.DS.'www',
+            ),
+        ),
+    ),
+
     'db' => array(
         'driver'         => 'Pdo',
         'driver_options' => array(

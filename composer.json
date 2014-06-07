@@ -14,7 +14,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "rwoverdijk/assetmanager": "dev-master"
     },
     "require-dev":
     {
