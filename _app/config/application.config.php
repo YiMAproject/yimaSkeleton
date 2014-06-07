@@ -11,6 +11,11 @@
  *
  */
 return array(
+    # modules name that used in application must list here
+    'modules' => array(
+        'Application',
+    ),
+
     /* X1: every key present here can fetch later */
 	'db' => array(
 		'prefix' => '',
@@ -51,11 +56,6 @@ return array(
         ),
     ),
     # ----------------------------------------------------
-
-	# modules name that used in application must list here
-	'modules' => array(
-        'Application',
-	),
 
     // ---------------------
     // DON`T EDIT LINES BELOW
