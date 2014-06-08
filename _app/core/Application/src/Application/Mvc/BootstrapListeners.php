@@ -77,6 +77,21 @@ class BootstrapListeners implements
         /** @var $request \Zend\Http\PhpEnvironment\Request */
         $request = $e->getRequest();
         if ($request->isXmlHttpRequest()) {
+            $viewModel = $e->getViewModel();
+            $template  = $viewModel->getTemplate();
+
+            $sm = $e->getApplication()->getServiceManager();
+            /** by default @var $viewResolver \Zend\View\Resolver\AggregateResolver */
+            $viewResolver   = $sm->get('ViewResolver');
+            $ajaxTemplate = $template.'(ajax)';
+            if ($viewResolver->resolve($ajaxTemplate)) {
+                // surroundings content with ajax template
+                $viewModel->setTemplate($ajaxTemplate);
+
+                return;
+            }
+
+            // render content without template
             $result->setTerminal(true);
         }
     }
