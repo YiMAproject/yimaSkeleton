@@ -1,8 +1,7 @@
 <?php echo $this->doctype(); ?>
 
-<html lang="en">
+<html lang="<?php echo (extension_loaded('intl')) ? \Locale::getPrimaryLanguage(\Locale::getDefault()) : ''; ?>">
 <head>
-    <meta charset="utf-8">
     <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
 
     <?php echo $this->headMeta()
@@ -23,7 +22,6 @@
         ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
         ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
     ; ?>
-
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -37,20 +35,28 @@
             <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Skeleton Application') ?></a>
         </div>
         <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
+            <?php
+            /** @var $menu \Zend\View\Helper\Navigation\Menu */
+            $menu = $this->navigation('navigation.default')->menu();
+            $menu->setUlClass('nav navbar-nav');
+            echo $menu->render();
+            ?>
+        </div>
     </div>
 </nav>
+
 <div class="container">
+
     <?php echo $this->content; ?>
     <hr>
 
     <footer>
         <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
     </footer>
-</div> <!-- /container -->
+
+</div>
+
 <?php echo $this->inlineScript() ?>
+
 </body>
 </html>

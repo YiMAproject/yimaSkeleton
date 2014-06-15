@@ -1,5 +1,29 @@
 <?php
 return array(
+    // Navigation setup ... {
+    'service_manager' => array(
+        'factories' => array(
+            # container of navigation default pages
+            'navigation.default' => 'Zend\Navigation\Service\DefaultNavigationFactory',
+        ),
+    ),
+    'navigation' => array(
+        'default' => array(
+            array(
+                'label' 	 => 'Home',
+                'module'	 => 'Application',
+                'route'		 => 'home',
+            ),
+        ),
+    ),
+    // ... }
+
+    'yima_widgetator' => array(
+        'invokables' => array(
+            'ezWidget' => 'Application\Widget\ezWidget',
+        ),
+    ),
+
 	'controllers' => array(
 		'invokables' => array(
 			'Application\Controller\Index' => 'Application\Controller\IndexController'
@@ -74,7 +98,8 @@ return array(
 				'type'     	  => 'phparray',
 				'base_dir' 	  => realpath(__DIR__ . '/../language'),
 				'pattern'  	  => '%s.php',
-				'text_domain' => 'Application',
+                //application translations using as default Text Domain
+				#'text_domain' => 'default',
 			),
 		),
 	),
