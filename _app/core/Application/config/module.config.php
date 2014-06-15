@@ -18,12 +18,6 @@ return array(
     ),
     // ... }
 
-    'yima_widgetator' => array(
-        'invokables' => array(
-            'ezWidget' => 'Application\Widget\ezWidget',
-        ),
-    ),
-
 	'controllers' => array(
 		'invokables' => array(
 			'Application\Controller\Index' => 'Application\Controller\IndexController'
