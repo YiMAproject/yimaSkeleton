@@ -10,9 +10,9 @@ return array(
     'navigation' => array(
         'default' => array(
             array(
-                'label' 	 => 'Home',
-                'module'	 => 'Application',
-                'route'		 => 'home',
+                'label' => 'Home',
+                'route' => 'home',
+                'order' => -1000,
             ),
         ),
     ),
