@@ -24,6 +24,7 @@
     ; ?>
 </head>
 <body>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -37,9 +38,11 @@
         <div class="collapse navbar-collapse">
             <?php
             /** @var $menu \Zend\View\Helper\Navigation\Menu */
-            $menu = $this->navigation('navigation.default')->menu();
-            $menu->setUlClass('nav navbar-nav');
-            echo $menu->render();
+            echo $this->navigation('navigation.default')
+                ->menu()
+                    ->setUlClass('nav navbar-nav')
+                    ->setPartial('partial/zf2-navigation-bootstrap3/navigation.phtml')
+            ;
             ?>
         </div>
     </div>
