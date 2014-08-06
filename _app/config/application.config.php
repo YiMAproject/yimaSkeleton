@@ -79,14 +79,14 @@ return array(
             APP_DIR_CONFIG .DS. 'modules.{,local.}config.php',
             APP_DIR_CONFIG .DS. '{,*.}{global,local}.php',
             APP_DIR_CONFIG .DS. '{,*.}{,*.}{global.,local.}config.php',
-            APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. 'modules.override.{,local.}config.php',
-            APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. '{,*.}{global,local}.php',
-            APP_DIR_CONFIG .DS. 'domains' .DS. APP_HOST .DS. '{,*.}{,*.}{global.,local.}config.php',
+            APP_DIR_CONFIG .DS. 'profiles' .DS. APP_PROFILE .DS. 'modules.override.{,local.}config.php',
+            APP_DIR_CONFIG .DS. 'profiles' .DS. APP_PROFILE .DS. '{,*.}{global,local}.php',
+            APP_DIR_CONFIG .DS. 'profiles' .DS. APP_PROFILE .DS. '{,*.}{,*.}{global.,local.}config.php',
         ),
 		# caching modules merged config
 		'config_cache_enabled'  => false,
 		'cache_dir'    		   	=> APP_DIR_CACHE,
-		'config_cache_key' 	    => 'modulesMergedConfig_'.APP_HOST, // name of cache file
+		'config_cache_key' 	    => 'modulesMergedConfig_'.APP_PROFILE, // name of cache file
 		
 		# also these options can beign set
 		/* 

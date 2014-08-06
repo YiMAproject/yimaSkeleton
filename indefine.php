@@ -1,9 +1,8 @@
 <?php
 /**
- * This file separated that 3rd party application can insance
+ * This file separated that 3rd party application can instance
  * system folder structure by require-ing- this file
  */
-
 // Define Consts
 define('REQUEST_MICROTIME', microtime(true));
 define('DS',DIRECTORY_SEPARATOR);
@@ -17,15 +16,66 @@ define('APP_DIR_CORE', 			APP_DIR_APPLICATION .DS. 'core');
 define('APP_DIR_TEMP', 			APP_DIR_APPLICATION .DS. 'tmp');
 define('APP_DIR_CACHE', 			APP_DIR_TEMP .DS. 'cache');
 
-// Get host name and define as global const {
-$config = include APP_DIR_CONFIG .DS. 'application.domains.php';
+// Setup autoLoading
+if (file_exists(APP_DIR_LIBRARIES .DS. 'autoload.php')) {
+    require_once APP_DIR_LIBRARIES .DS. 'autoload.php';
+}
 
-$hostName = (PHP_SAPI != 'cli') ? $_SERVER['SERVER_NAME'] : 'localhost';
-$hostName = (substr($hostName, 0, 3) == 'www') ? substr($hostName, 4) : $hostName;
-if (! isset($config['domains'][$hostName]) ) {
-    while (isset($config['domains']['canonical_domains'][$hostName])) {
-        $hostName = $config['domains']['canonical_domains'][$hostName];
+require_once APP_DIR_LIBRARIES .DS. 'autoload_yima.php';
+
+// Get profile name and define as global const {
+$availableProfiles = include APP_DIR_CONFIG .DS. 'application.profiles.php';
+
+$profile = null;
+foreach ($availableProfiles as $prof => $callable) {
+    $executeProfCallable = function ($callable) {
+        switch ($callable) {
+            case ($callable instanceof \Closure):
+                return $callable();
+                break;
+            default: throw new \Exception('Invalid Profile Callable.');
+        }
+    };
+
+    if ($executeProfCallable($callable)) {
+        // run profiles callable
+        $profile = $prof;
+        break;
     }
 }
-define('APP_HOST',$hostName);
+
+/*$router = \Zend\Mvc\Router\Http\TreeRouteStack::factory(
+    array(
+        'routes' => array(
+            'username_profile' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/username',
+                    'defaults' => array(
+                        'profile'   => 'username',
+                    ),
+                ),
+                'may_terminate' => true,
+            ),
+        ),
+    )
+);
+$routeMatch = $router->match(new \Zend\Http\PhpEnvironment\Request());
+if ($routeMatch && $routeMatch->getParam('profile')) {
+    $profile = $routeMatch->getParam('profile');
+    var_dump($router->assemble(array(), array('name' => $routeMatch->getMatchedRouteName())));
+    $_SERVER['REQUEST_URI'] = '/yima/';
+}
+
+$profileAlias = null;
+if (! isset($availableProfiles[$profile]) ) {
+    $profileAlias = $profile;
+    while (isset($availableProfiles['aliases'][$profileAlias])) {
+        $profileAlias = $availableProfiles['aliases'][$profile];
+    }
+}*/
+
+if (!$profile) throw new \Exception('No Profile Matched.');
+
+define('APP_PROFILE', $profile);
 // ... }
