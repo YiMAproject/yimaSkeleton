@@ -6,7 +6,7 @@ function p_r($var) {
     echo "</pre>";
 }
 
-function d_r($var) {
+function d_r($var, $debug = false) {
     $backTrace = current(debug_backtrace());
     $baseFilename = basename($backTrace['file']);
     echo "
@@ -26,8 +26,14 @@ function d_r($var) {
                 </td>
                 <td align=\"left\" bgcolor=\"#eeeeec\" valign=\"top\">
                     <pre>";
-    var_dump($var);
-    echo "</pre>
+                    var_dump($var);
+                    echo "</pre>
+                </td>
+                <td align=\"left\" bgcolor=\"#eeeeec\" valign=\"top\">
+                    <pre>";
+                    list(,$caller) = debug_backtrace(false);
+                    if ($debug) var_dump($caller);
+                    echo "</pre>
                 </td>
             </tr>
         </tbody>

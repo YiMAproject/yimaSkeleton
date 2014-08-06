@@ -7,11 +7,11 @@ if (file_exists(APP_DIR_LIBRARIES .DS. 'autoload.php')) {
     require_once APP_DIR_LIBRARIES .DS. 'autoload.php';
 }
 
-require_once APP_DIR_LIBRARIES .DS. 'autoload_anocomposer.php';
+require_once APP_DIR_LIBRARIES .DS. 'autoload_yima.php';
 
 // startup preparation
-if (file_exists(APP_DIR_LIBRARIES .DS. 'startup.php')) {
-    require_once APP_DIR_LIBRARIES .DS. 'startup.php';
+if (file_exists(APP_DIR_CORE .DS. 'bootstrap.php')) {
+    require_once APP_DIR_CORE .DS. 'bootstrap.php';
 }
 
 // Run the application!

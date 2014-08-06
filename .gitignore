@@ -17,12 +17,12 @@ _app/config/domains/*/*.local.php
 _app/config/domains/*/*.local.config.php
 
 _app/vendor/**
-_app/core/**
+_app/core/*
 !_app/core/Application
+!_app/core/bootstrap.php
 
 # Default Vendor Libraries (not composer) #
 !_app/vendor/Datasecurity
-!_app/vendor/rayamedia/yima-base
 !_app/vendor/xSampleClassmapSingle
 !_app/vendor/*.php
 _app/vendor/autoload.php
