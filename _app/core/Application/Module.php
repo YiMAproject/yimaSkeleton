@@ -2,6 +2,8 @@
 namespace Application;
 
 use Application\Mvc\BootstrapListeners;
+use Zend\ModuleManager\ModuleEvent;
+use Zend\ModuleManager\ModuleManagerInterface;
 use Zend\Mvc\MvcEvent;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 
@@ -12,6 +14,42 @@ use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
  */
 class Module
 {
+    /**
+     * Initialize workflow
+     *
+     * @param  ModuleManagerInterface $moduleManager
+     * @return void
+     */
+    public function init(ModuleManagerInterface $moduleManager)
+    {
+        // initial current user
+        $events = $moduleManager->getEventManager();
+        $events->attach(
+            ModuleEvent::EVENT_LOAD_MODULES_POST,
+            array($this,'onLoadModulesPost'),
+            -10
+        );
+    }
+
+    /**
+     * Initialize workflow
+     *
+     * @param  ModuleManagerInterface $moduleManager
+     * @return void
+     */
+    public function onLoadModulesPost(ModuleEvent $e)
+    {
+        /** @var $moduleManager \Zend\ModuleManager\ModuleManager */
+        $moduleManager = $e->getTarget();
+        $sm = $moduleManager->getEvent()->getParam('ServiceManager');
+
+        // DB: Using Global db Adapter for TableGateWay\Featured\GlobalAdapterFeature {
+        // we want db adapter injected before others
+        $adapter = $sm->get('Zend\Db\Adapter\Adapter');
+        GlobalAdapterFeature::setStaticAdapter($adapter);
+        // ... }
+    }
+
     /**
      * Listen to the bootstrap event
      *
@@ -27,12 +65,6 @@ class Module
         $bootStrapListeners = new BootstrapListeners();
         $bootStrapListeners->attachShared($sharedManager);
         $bootStrapListeners->attach($eventManager);
-        // ... }
-
-        // DB: Using Global db Adapter for TableGateWay\Featured\GlobalAdapterFeature {
-        $sl = $e->getApplication()->getServiceManager();
-        $adapter = $sl->get('Zend\Db\Adapter\Adapter');
-        GlobalAdapterFeature::setStaticAdapter($adapter);
         // ... }
     }
 
