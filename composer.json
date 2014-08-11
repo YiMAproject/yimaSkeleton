@@ -15,6 +15,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
+        "rayamedia/yima-base": "dev-master",
         "rwoverdijk/assetmanager": "dev-master"
     },
     "require-dev":
