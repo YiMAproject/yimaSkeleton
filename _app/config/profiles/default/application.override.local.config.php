@@ -21,6 +21,7 @@ return array(
 //        'yimaLocali',
 //        'yimaLocalize',
         'yimaTheme',
+<<<<<<< Updated upstream
 //        'yimaAdminor',
 //        'yimaSkeletonModule',
 //        'yimaSettings',
@@ -28,5 +29,9 @@ return array(
 //        'typoPages',
 //        'Analytics',
         'Zuoo',
+=======
+        'typoPages',
+//        'Analytics',
+>>>>>>> Stashed changes
     ),
 );
