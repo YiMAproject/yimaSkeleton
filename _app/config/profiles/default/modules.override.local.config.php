@@ -9,7 +9,7 @@ return array(
         'credential' => 'value',
     ),
     'db' => array(
-    	'dsn'      => 'mysql:dbname=yima;host=localhost',
+    	'dsn'      => 'mysql:dbname=zuoo;host=localhost',
         'username' => 'root',
         'password' => '',
     ),
