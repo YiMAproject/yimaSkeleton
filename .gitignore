@@ -11,10 +11,10 @@ nbproject
 tmp/
 
 # Local configuration files #
-_app/config/*.local.php
-_app/config/*.local.config.php
-_app/config/domains/*/*.local.php
-_app/config/domains/*/*.local.config.php
+_app/profiles/*.local.php
+_app/profiles/*.local.config.php
+_app/profiles/domains/*/*.local.php
+_app/profiles/domains/*/*.local.config.php
 
 _app/vendor/**
 _app/core/*
