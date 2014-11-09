@@ -34,7 +34,8 @@ class Module
     /**
      * Initialize workflow
      *
-     * @param  ModuleManagerInterface $moduleManager
+     * @param ModuleEvent $e
+     * @internal param ModuleManagerInterface $moduleManager
      * @return void
      */
     public function onLoadModulesPost(ModuleEvent $e)
@@ -66,28 +67,6 @@ class Module
         $bootStrapListeners->attachShared($sharedManager);
         $bootStrapListeners->attach($eventManager);
         // ... }
-    }
-
-    /**
-     * Expected to return \Zend\ServiceManager\Config object or array to
-     * seed such an object.
-     *
-     * @return array|\Zend\ServiceManager\Config
-     */
-    public function getServiceConfig()
-    {
-        return array (
-            // DB: Using Global db Adapter on each services Implemented AdapterAwareInterface
-            'initializers' => array (
-                function ($instance, $sm) {
-                    if ($instance instanceof \Zend\Db\Adapter\AdapterAwareInterface) {
-                        $instance->setDbAdapter(
-                            $sm->get('Zend\Db\Adapter\Adapter')
-                        );
-                    }
-                }
-            ),
-        );
     }
 
     /**
