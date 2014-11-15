@@ -20,7 +20,6 @@ _app/config/profiles/*/*.local.config.php
 _app/vendor/**
 _app/modules/*
 !_app/modules/Application
-!_app/modules/bootstrap.php
 
 # Default Vendor Libraries (not composer) #
 !_app/vendor/Datasecurity

@@ -9,9 +9,8 @@ chdir(__DIR__);
 require 'indefine.php';
 
 // startup preparation
-if (file_exists(APP_DIR_CORE .DS. 'bootstrap.php')) {
-    require_once APP_DIR_CORE .DS. 'bootstrap.php';
-}
+$appBootstrap = APP_DIR_CONFIG .DS. 'profiles' .DS. 'bootstrap.php';
+(!file_exists($appBootstrap)) ?: include $appBootstrap;
 
 // Run the application!
 try {
@@ -26,6 +25,11 @@ try {
         ob_get_clean();
         $defaultConf = \Zend\Stdlib\ArrayUtils::merge($defaultConf, $hostConf);
     }
+
+    // bootstrap profile
+    $profBootstrap = APP_DIR_CONFIG .DS. 'profiles' .DS. APP_PROFILE .DS. 'bootstrap.php';
+    (!file_exists($profBootstrap)) ?: include $profBootstrap;
+
 
 	// run application
 	Zend\Mvc\Application::init($defaultConf)->run();
