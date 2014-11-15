@@ -87,6 +87,8 @@ return array(
 	
 	# translation enabled by text-domain defined to use for this module
 	'translator' => array(
+        # Set Default Locale, fix get default locale from intl extension on Translator
+        'locale' => 'en_US',
 		'translation_file_patterns' => array(
 			array(
 				'type'     	  => 'phparray',
