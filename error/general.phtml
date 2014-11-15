@@ -1,0 +1,82 @@
+<?php
+/**
+ * @var $e \Exception
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="author" content="SmartIM">
+
+    <title>Error::<?php echo get_class($e); ?></title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+            margin: 50px;
+        }
+
+        div, p {
+            font-family: Tahoma;
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 10px;
+            width: 500px;
+            line-height: 18px;
+        }
+
+        h1 {
+            font-family: Georgia;
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: normal;
+            color: #004388;
+            border-bottom: 1px solid #cccccc;
+            padding-bottom: 3px;
+            width: 500px;
+        }
+
+        a {
+            color: #004388;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #004388;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Error</h1>
+    <p><?php echo $e->getMessage(); ?></p>
+
+    <?php if (error_reporting() != 0) { ?>
+
+    <h2><?php echo 'Additional information' ?>:</h2>
+    <h3><?php echo get_class($e); ?></h3>
+    <dl>
+        <dt><?php echo 'File'; ?>:</dt>
+        <dd>
+            <pre class="prettyprint linenums"><?php echo $e->getFile() ?>:<?php echo $e->getLine() ?></pre>
+        </dd>
+        <dt><?php echo 'Message' ?>:</dt>
+        <dd>
+            <pre class="prettyprint linenums"><?php echo $e->getMessage() ?></pre>
+        </dd>
+        <dt><?php echo 'Stack trace' ?>:</dt>
+        <dd>
+            <pre class="prettyprint linenums"><?php echo $e->getTraceAsString() ?></pre>
+        </dd>
+    </dl>
+    <?php } ?>
+</body>
+</html>
