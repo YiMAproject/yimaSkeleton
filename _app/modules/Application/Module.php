@@ -18,6 +18,7 @@ class Module
      * Initialize workflow
      *
      * @param  ModuleManagerInterface $moduleManager
+     * @throws \Exception
      * @return void
      */
     public function init(ModuleManagerInterface $moduleManager)
@@ -29,6 +30,10 @@ class Module
             array($this,'onLoadModulesPost'),
             -10
         );
+
+        // init requirements
+        if (!getenv('HTTP_MOD_REWRITE'))
+            throw new \Exception('It seems that you don\'t have "MOD_REWRITE" enabled on the server.');
     }
 
     /**
