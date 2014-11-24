@@ -3,4 +3,12 @@ return array(
     'sample_conf' => array(
         'key' => 'value',
     ),
+    'sample_conf' => array(
+            'credential' => 'value',
+        ),
+        'db' => array(
+        	'dsn'      => 'mysql:dbname=zuoo;host=localhost',
+            'username' => 'root',
+            'password' => '',
+        ),
 );
