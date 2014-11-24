@@ -1,6 +1,6 @@
 <?php
 /**
- * Merged with application.global.config.php values
+ * Merged with application.config.php values
  * at very first application run on index.php
  *
  * Note: this config not merged with global config on equal keys
@@ -9,8 +9,8 @@
 return array(
     'modules' => array(
         'AssetManager',
-        'Application',    // in reason of top note, you must enter full list of modules -
-                          //  including Application as well
+        'Application',    // in reason of config merging, you must enter full list of modules -
+                          //  including Application as well. see not at top of file
         'SkeletonModule',
     ),
 );
