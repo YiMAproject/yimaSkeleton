@@ -3,6 +3,7 @@ namespace
 {
     use Poirot\Core;
     use yimaBase\Mvc\Application;
+    use Zend\Mvc\MvcEvent;
 
     (!defined('PHP_VERSION_ID') or PHP_VERSION_ID < 50306 ) and
     exit('Needs at least PHP5.3 but you have ' . phpversion() . '.');
@@ -18,6 +19,9 @@ namespace
      *
      */
     require 'index.consist.php';
+
+    // Just Autoload Namespaces Functions
+    new Poirot\Core\Core();
 
     // Get profile name and define as global const {
     $availableProfiles = include APP_DIR_CONFIG .DS. 'application.profiles.php';
@@ -108,7 +112,7 @@ namespace
         try {
             $APP->getEventManager()
                 ->trigger(
-                    Application::EVENT_DISPATCH_ERROR
+                    MvcEvent::EVENT_DISPATCH_ERROR
                     , $APP->getMvcEvent()
                 );
         } catch (Exception $e) {
