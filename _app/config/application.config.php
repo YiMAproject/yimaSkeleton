@@ -36,7 +36,8 @@ return array(
     'service_manager' => array(
         'invokables' => array(
             // Set Some Default Listeners
-            'SendExceptionListener' => 'yimaBase\Mvc\Listener\SendExceptionListener',
+            'ExceptionMvcStrategyListener' => 'yimaBase\Mvc\View\Listener\ExceptionMvcStrategyListener',
+            'SendExceptionListener'        => 'yimaBase\Mvc\Listener\SendExceptionListener',
         ),
         'factories'  => array (
             // just for study case reason ...
@@ -67,6 +68,7 @@ return array(
      * and attach to EventManager in Application::init()
      */
     'listeners' => array(
+        'ExceptionMvcStrategyListener',
         'SendExceptionListener',
     ),
 

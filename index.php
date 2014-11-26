@@ -108,14 +108,15 @@ namespace
         $APP = Application::init($defaultConf);
         $APP->run();
     }
-    catch (Exception $e) {
+    catch (Exception $er) {
         try {
             // Set Accured Exception as MVC Error
-            $APP->getMvcEvent()
-                ->setError($e);
-            // Trigger Error Event
-            $APP->getEventManager()
-                ->trigger(MvcEvent::EVENT_ERROR, $APP->getMvcEvent());
+            $APP->getMvcEvent()->setError($er);
+            $APP->getEventManager()->trigger(MvcEvent::EVENT_ERROR, $APP->getMvcEvent());
+            // with default SendExceptionListener
+            // Throw accrued exception so we may don't reach this lines below
+            // ...
+            $APP->run();
         } catch (Exception $e) {
             ob_start();
             include 'error'.DS.'general.phtml';
