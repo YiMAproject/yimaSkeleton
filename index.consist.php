@@ -22,5 +22,3 @@ define('APP_DIR_CACHE', 			APP_DIR_TEMP .DS. 'cache');
 if (file_exists(APP_DIR_LIBRARIES .DS. 'autoload.php')) {
     require_once APP_DIR_LIBRARIES .DS. 'autoload.php';
 }
-
-require_once APP_DIR_LIBRARIES .DS. 'autoload_yima.php';
