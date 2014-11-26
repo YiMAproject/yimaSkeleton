@@ -3,7 +3,7 @@ namespace
 {
     use Poirot\Core;
     use yimaBase\Mvc\Application;
-    use Zend\Mvc\MvcEvent;
+    use yimaBase\Mvc\MvcEvent;
 
     (!defined('PHP_VERSION_ID') or PHP_VERSION_ID < 50306 ) and
     exit('Needs at least PHP5.3 but you have ' . phpversion() . '.');
@@ -110,11 +110,12 @@ namespace
     }
     catch (Exception $e) {
         try {
+            // Set Accured Exception as MVC Error
+            $APP->getMvcEvent()
+                ->setError($e);
+            // Trigger Error Event
             $APP->getEventManager()
-                ->trigger(
-                    MvcEvent::EVENT_DISPATCH_ERROR
-                    , $APP->getMvcEvent()
-                );
+                ->trigger(MvcEvent::EVENT_ERROR, $APP->getMvcEvent());
         } catch (Exception $e) {
             ob_start();
             include 'error'.DS.'general.phtml';

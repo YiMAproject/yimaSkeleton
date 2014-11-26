@@ -34,7 +34,11 @@ return array(
      * @see \Zend\Mvc\Service\ServiceManagerConfig
      */
     'service_manager' => array(
-        'factories' => array (
+        'invokables' => array(
+            // Set Some Default Listeners
+            'SendExceptionListener' => 'yimaBase\Mvc\Listener\SendExceptionListener',
+        ),
+        'factories'  => array (
             // just for study case reason ...
 
             // you can replace application startup or default ServiceManagerConfig with your own services
@@ -57,6 +61,14 @@ return array(
         ),
     ),
     # ----------------------------------------------------
+
+    /*
+     * Listeners config is a service that fetch from serviceManager
+     * and attach to EventManager in Application::init()
+     */
+    'listeners' => array(
+        'SendExceptionListener',
+    ),
 
     // ---------------------
     // DON`T EDIT LINES BELOW
