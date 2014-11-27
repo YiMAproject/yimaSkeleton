@@ -24,23 +24,33 @@
 
         div, p {
             font-family: Tahoma;
-            font-size: 14px;
+            font-size: 1.4em;
             color: #333333;
             margin-bottom: 10px;
-            width: 500px;
-            line-height: 18px;
+            width: 60%;
+            line-height: 1.2em;
         }
 
         h1 {
             font-family: Georgia;
-            font-size: 20px;
-            margin-bottom: 10px;
-            font-size: 20px;
+            margin-bottom: 0.4em;
+            font-size: 2.5em;
             font-weight: normal;
             color: #004388;
             border-bottom: 1px solid #cccccc;
             padding-bottom: 3px;
-            width: 500px;
+            width: 60%;
+        }
+
+        .highlight {
+            padding: 9px 14px;
+            margin-bottom: 14px;
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 1.2em;
+            line-height: 1.4em;
         }
 
         a {
@@ -61,22 +71,45 @@
 
     <?php if (error_reporting() != 0) { ?>
 
-    <h2><?php echo 'Additional information' ?>:</h2>
-    <h3><?php echo get_class($e); ?></h3>
-    <dl>
-        <dt><?php echo 'File'; ?>:</dt>
-        <dd>
-            <pre class="prettyprint linenums"><?php echo $e->getFile() ?>:<?php echo $e->getLine() ?></pre>
-        </dd>
-        <dt><?php echo 'Message' ?>:</dt>
-        <dd>
-            <pre class="prettyprint linenums"><?php echo $e->getMessage() ?></pre>
-        </dd>
-        <dt><?php echo 'Stack trace' ?>:</dt>
-        <dd>
-            <pre class="prettyprint linenums"><?php echo $e->getTraceAsString() ?></pre>
-        </dd>
-    </dl>
+    <div class="highlight">
+        <h3><?php echo get_class($e); ?></h3>
+        <dl>
+            <dt><?php echo 'File'; ?>:</dt>
+            <dd>
+                <pre class="prettyprint linenums"><?php echo $e->getFile() ?>:<?php echo $e->getLine() ?></pre>
+            </dd>
+            <dt><?php echo 'Message' ?>:</dt>
+            <dd>
+                <pre class="prettyprint linenums"><?php echo $e->getMessage() ?></pre>
+            </dd>
+            <dt><?php echo 'Stack trace' ?>:</dt>
+            <dd>
+                <pre class="prettyprint linenums"><?php echo $e->getTraceAsString() ?></pre>
+            </dd>
+        </dl>
+
+        <?php if ($e->getPrevious()){ $e = $e->getPrevious(); ?>
+        <div class="highlight">
+            <h3><?php echo get_class($e); ?></h3>
+            <dl>
+                <dt><?php echo 'File'; ?>:</dt>
+                <dd>
+                    <pre class="prettyprint linenums"><?php echo $e->getFile() ?>:<?php echo $e->getLine() ?></pre>
+                </dd>
+                <dt><?php echo 'Message' ?>:</dt>
+                <dd>
+                    <pre class="prettyprint linenums"><?php echo $e->getMessage() ?></pre>
+                </dd>
+                <dt><?php echo 'Stack trace' ?>:</dt>
+                <dd>
+                    <pre class="prettyprint linenums"><?php echo $e->getTraceAsString() ?></pre>
+                </dd>
+            </dl>
+        </div>
+        <?php } ?>
+
+    </div>
+
     <?php } ?>
 </body>
 </html>

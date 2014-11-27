@@ -3,7 +3,6 @@ namespace
 {
     use Poirot\Core;
     use yimaBase\Mvc\Application;
-    use yimaBase\Mvc\MvcEvent;
 
     (!defined('PHP_VERSION_ID') or PHP_VERSION_ID < 50306 ) and
     exit('Needs at least PHP5.3 but you have ' . phpversion() . '.');
@@ -21,7 +20,7 @@ namespace
     require 'index.consist.php';
 
     // Get profile name and define as global const {
-    $availableProfiles = include APP_DIR_CONFIG .DS. 'application.profiles.php';
+    $availableProfiles = include APP_DIR_CONFIG .DS. 'profiles' .DS. 'application.profiles.php';
 
     $profile = null;
     foreach ($availableProfiles as $prof => $callable) {
@@ -105,19 +104,9 @@ namespace
         $APP = Application::init($defaultConf);
         $APP->run();
     }
-    catch (Exception $er) {
-        try {
-            // Set Accured Exception as MVC Error
-            $APP->getMvcEvent()->setError($er);
-            $APP->getEventManager()->trigger(MvcEvent::EVENT_ERROR, $APP->getMvcEvent());
-            // with default SendExceptionListener
-            // Throw accrued exception so we may don't reach this lines below
-            // ...
-            $APP->run();
-        } catch (Exception $e) {
-            ob_start();
-            include 'error'.DS.'general.phtml';
-            ob_end_flush();
-        }
+    catch (Exception $e) {
+        ob_start();
+        include 'error'.DS.'general.phtml';
+        ob_end_flush();
     }
 }
