@@ -20,9 +20,6 @@ namespace
      */
     require 'index.consist.php';
 
-    // Just Autoload Namespaces Functions
-    new Poirot\Core\Core();
-
     // Get profile name and define as global const {
     $availableProfiles = include APP_DIR_CONFIG .DS. 'application.profiles.php';
 
