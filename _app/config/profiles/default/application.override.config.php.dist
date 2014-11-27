@@ -11,6 +11,5 @@ return array(
         'AssetManager',
         'Application',    // in reason of config merging, you must enter full list of modules -
                           //  including Application as well. see not at top of file
-        'SkeletonModule',
     ),
 );
