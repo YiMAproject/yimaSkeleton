@@ -1,9 +1,6 @@
 <?php
 namespace
 {
-    use Poirot\Core;
-    use yimaBase\Mvc\Application;
-
     (!defined('PHP_VERSION_ID') or PHP_VERSION_ID < 50306 ) and
     exit('Needs at least PHP5.3 but you have ' . phpversion() . '.');
 
@@ -19,101 +16,70 @@ namespace
      */
     require 'index.consist.php';
 
-    // Get profile name and define as global const {
-    $availableProfiles = include APP_DIR_CONFIG .DS. 'profiles' .DS. 'application.profiles.php';
-
-    $profile = null;
-    foreach ($availableProfiles as $prof => $callable) {
-        $executeProfCallable = function ($callable) {
-            switch ($callable) {
-                case ($callable instanceof \Closure):
-                    return $callable();
-                    break;
-                default: throw new \Exception('Invalid Profile Callable.');
-            }
-        };
-
-        if ($executeProfCallable($callable)) {
-            // run profiles callable
-            $profile = $prof;
-            break;
-        }
-    }
-
-    /*$router = \Zend\Mvc\Router\Http\TreeRouteStack::factory(
-        array(
-            'routes' => array(
-                'username_profile' => array(
-                    'type'    => 'Literal',
-                    'options' => array(
-                        'route'    => '/username',
-                        'defaults' => array(
-                            'profile'   => 'username',
-                        ),
-                    ),
-                    'may_terminate' => true,
-                ),
-            ),
-        )
-    );
-    $routeMatch = $router->match(new \Zend\Http\PhpEnvironment\Request());
-    if ($routeMatch && $routeMatch->getParam('profile')) {
-        $profile = $routeMatch->getParam('profile');
-        var_dump($router->assemble(array(), array('name' => $routeMatch->getMatchedRouteName())));
-        $_SERVER['REQUEST_URI'] = '/yima/';
-    }
-
-    $profileAlias = null;
-    if (! isset($availableProfiles[$profile]) ) {
-        $profileAlias = $profile;
-        while (isset($availableProfiles['aliases'][$profileAlias])) {
-            $profileAlias = $availableProfiles['aliases'][$profile];
-        }
-    }*/
-
-    if (!$profile) throw new \Exception('No Profile Matched.');
-
-    define('APP_PROFILE', $profile);
-// ... }
-
-
-
-// startup preparation
-    $appBootstrap = APP_DIR_CONFIG .DS. 'profiles' .DS. 'bootstrap.php';
-    (!file_exists($appBootstrap)) ?: include $appBootstrap;
-
-// Run the application!
+    // Run the application!
     try {
-        // try to reach profile specific config
-        $defaultConf = include  APP_DIR_CONFIG .DS. 'application.config.php';
+        $availableProfiles = include APP_DIR_CONFIG .DS. 'profiles' .DS. 'application.profiles.php';
+        if (!isset($availableProfiles['profiles']) && !is_array($availableProfiles['profiles']))
+            throw new \Exception('No Profiles Defined.');
 
-        $domainConfFiles = APP_DIR_CONFIG .DS. 'profiles' .DS. APP_PROFILE .DS. 'application.override.{,local.}config.php';
-        foreach (glob($domainConfFiles, GLOB_BRACE) as $file) {
-            // merge with default config
-            ob_start();
-            $hostConf = include $file;
-            ob_get_clean();
-            $defaultConf = Core\array_merge($defaultConf, $hostConf);
+        // Detect Profile ------------------------------------------------------------------------------------
+        if (!defined('APP_PROFILE')) {
+            foreach ($availableProfiles['profiles'] as $profile => $val)
+            {
+                if (isset($val['check']))
+                    $checkProfile = $val['check'];
+
+                $executeProfCallable = function ($callable) {
+                    switch ($callable) {
+                        case ($callable instanceof \Closure):
+                            return $callable();
+                            break;
+                        default: throw new \Exception('Invalid Profile Callable.');
+                    }
+                };
+
+                if ($executeProfCallable($checkProfile)) {
+                    // run profiles callable
+                    define('APP_PROFILE', $profile);
+                    break;
+                }
+            }
         }
 
-        // bootstrap profile
-        $profBootstrap = APP_DIR_CONFIG .DS. 'profiles' .DS. APP_PROFILE .DS. 'bootstrap.php';
-        (!file_exists($profBootstrap)) ?: include $profBootstrap;
+        if (!defined('APP_PROFILE'))
+            throw new \Exception('No Profile Matched.');
 
-        // run application
-        $APP = Application::init($defaultConf);
-        $APP->run();
+        // Startup preparation -------------------------------------------------------------------------------
+        $appBootstrap = APP_DIR_CONFIG .DS. 'profiles' .DS. 'bootstrap.php';
+        (!file_exists($appBootstrap)) ?: include $appBootstrap;
+
+        // Execute Profile -----------------------------------------------------------------------------------
+        $p = APP_PROFILE;
+        $profile = $availableProfiles['profiles'][$p];
+        if (!isset($profile['exec']))
+            while(isset($availableProfiles['aliases'][$p]))
+                $p = $availableProfiles['aliases'][$p];
+
+        if (!isset($availableProfiles['profiles'][$p]['exec']))
+            throw new \Exception(sprintf(
+                'Profile "%s" Exec Attribute Not Executable or not Defined.'
+                , APP_PROFILE
+            ));
+
+        $exec = $availableProfiles['profiles'][$p]['exec'];
+        $exec();
     }
     catch (Exception $er) {
         try
         {
-            // Set Accrued Exception as MVC Error
+            /*// Set Accrued Exception as MVC Error
             $APP->getMvcEvent()->setError($er);
             $APP->getEventManager()->trigger('error', $APP->getMvcEvent());
             // with default SendExceptionListener
             // Throw accrued exception so we may don't reach this lines below
             // ...
-            $APP->run();
+            $APP->run();*/
+            throw $er;
         }
         catch(\Exception $e)
         {
