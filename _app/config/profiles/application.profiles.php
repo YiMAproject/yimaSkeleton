@@ -35,7 +35,11 @@ return array(
                     foreach (glob($domainConfFiles, GLOB_BRACE) as $file) {
                         // merge with default config
                         ob_start();
+                        set_error_handler(function($errno, $errstr) {
+                            throw new \ErrorException($errstr, $errno);
+                        }, E_ALL);
                         $hostConf = include $file;
+                        restore_error_handler();
                         ob_get_clean();
                         $defaultConf = Core\array_merge($defaultConf, $hostConf);
                     }
@@ -45,8 +49,12 @@ return array(
                     (!file_exists($profBootstrap)) ?: include $profBootstrap;
 
                     // run application
-                    $APP = Application::init($defaultConf);
-                    $APP->run();
+                    $APP = Application::instance($defaultConf);
+                    $res = $APP->getServiceManager()
+                            ->get('Application')
+                                ->run();
+
+                    kd($res);
                 },
         ],
     ],
@@ -56,35 +64,3 @@ return array(
     ],
 
 );
-
-
-/*$router = \Zend\Mvc\Router\Http\TreeRouteStack::factory(
-            array(
-                'routes' => array(
-                    'username_profile' => array(
-                        'type'    => 'Literal',
-                        'options' => array(
-                            'route'    => '/username',
-                            'defaults' => array(
-                                'profile'   => 'username',
-                            ),
-                        ),
-                        'may_terminate' => true,
-                    ),
-                ),
-            )
-        );
-        $routeMatch = $router->match(new \Zend\Http\PhpEnvironment\Request());
-        if ($routeMatch && $routeMatch->getParam('profile')) {
-            $profile = $routeMatch->getParam('profile');
-            var_dump($router->assemble(array(), array('name' => $routeMatch->getMatchedRouteName())));
-            $_SERVER['REQUEST_URI'] = '/yima/';
-        }
-
-        $profileAlias = null;
-        if (! isset($availableProfiles[$profile]) ) {
-            $profileAlias = $profile;
-            while (isset($availableProfiles['aliases'][$profileAlias])) {
-                $profileAlias = $availableProfiles['aliases'][$profile];
-            }
-        }*/

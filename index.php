@@ -23,9 +23,11 @@ namespace
             throw new \Exception('No Profiles Defined.');
 
         // Detect Profile ------------------------------------------------------------------------------------
-        if (!defined('APP_PROFILE')) {
+        if (!defined('APP_PROFILE'))
             foreach ($availableProfiles['profiles'] as $profile => $val)
             {
+                $checkProfile = null;
+
                 if (isset($val['check']))
                     $checkProfile = $val['check'];
 
@@ -44,7 +46,6 @@ namespace
                     break;
                 }
             }
-        }
 
         if (!defined('APP_PROFILE'))
             throw new \Exception('No Profile Matched.');
@@ -69,23 +70,9 @@ namespace
         $exec = $availableProfiles['profiles'][$p]['exec'];
         $exec();
     }
-    catch (Exception $er) {
-        try
-        {
-            /*// Set Accrued Exception as MVC Error
-            $APP->getMvcEvent()->setError($er);
-            $APP->getEventManager()->trigger('error', $APP->getMvcEvent());
-            // with default SendExceptionListener
-            // Throw accrued exception so we may don't reach this lines below
-            // ...
-            $APP->run();*/
-            throw $er;
-        }
-        catch(\Exception $e)
-        {
-            ob_start();
-            include 'error'.DS.'general.phtml';
-            ob_end_flush();
-        }
+    catch (Exception $e) {
+        ob_start();
+        include 'error'.DS.'general.phtml';
+        ob_end_flush();
     }
 }
