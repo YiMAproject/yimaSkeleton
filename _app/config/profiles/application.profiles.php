@@ -49,12 +49,12 @@ return array(
                     (!file_exists($profBootstrap)) ?: include $profBootstrap;
 
                     // run application
+                    /*$APP = \Zend\Mvc\Application::init($defaultConf);
+                    $APP->run();*/
                     $APP = Application::instance($defaultConf);
                     $res = $APP->getServiceManager()
                             ->get('Application')
                                 ->run();
-
-                    kd($res);
                 },
         ],
     ],
@@ -62,5 +62,4 @@ return array(
     'aliases' => [
         'console' => 'default',
     ],
-
 );

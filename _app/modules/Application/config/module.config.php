@@ -20,8 +20,12 @@ return array(
 
 	'controllers' => array(
 		'invokables' => array(
-			'Application\Controller\Index' => 'Application\Controller\IndexController'
+			'Application.Controller.Index' => 'Application\Controller\IndexController'
 		),
+        'aliases' => [
+            // Alias Controller Manipulated with "ModuleRouteListener"
+            'Application\Controller\Index' => 'Application.Controller.Index'
+        ],
 	),
 
     'view_manager' => array(
@@ -47,7 +51,7 @@ return array(
                 'options' => array(
                     'route'    => '/',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => 'Application.Controller.Index',
                         'action'     => 'index',
                     ),
                 ),
@@ -56,10 +60,11 @@ return array(
         	// new controllers and actions without needing to create a new
         	// module. Simply drop new controllers in, and you can access them
         	// using the path /application/:controller/:action
+            // Used by "ModuleRouteListener"
         	'application' => array(
         		'type'    => 'Literal',
         		'options' => array(
-        			'route'    => '/st-pages',
+        			'route'    => '/application',
         			'defaults' => array(
         				'__NAMESPACE__' => 'Application\Controller',
         				'controller'    => 'Index',
