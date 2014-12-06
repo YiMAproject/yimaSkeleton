@@ -11,8 +11,7 @@ return array(
      * and attach to EventManager in Application::initialize()
      */
     'listeners' => [
-        'ExceptionMvcStrategyListener',
-        'SendExceptionListener',
+        
     ],
 
     'application_config' => [
