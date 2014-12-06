@@ -6,10 +6,13 @@
  * Note: this config not merged with global config on equal keys
  *       but fully replaced.
  */
-return array(
-    'modules' => array(
-        'AssetManager',
-        'Application',    // in reason of config merging, you must enter full list of modules -
-                          //  including Application as well. see not at top of file
-    ),
-);
+return [
+    'application_config' => [
+        'modules' => [
+            #'AssetManager',
+            #'Application',
+
+            // Additional modules
+        ],
+    ],
+];
