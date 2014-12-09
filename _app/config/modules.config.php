@@ -22,17 +22,26 @@
 
 return array(
     'view_manager' => array(
+        'layout'           => 'default', 		// default value is 'layouy/layout' by ViewManager
+
+        // Set Exceptions Specific LayoutScript
+        # used with ExceptionMvcStrategyListener
+        'layout_exception' => [
+            'yimaBase\Mvc\Exception\RouteNotFoundException' => 'spec/404',
+        ],
+
+        /* @TODO DEPRECATED */
 		'display_not_found_reason' 	=> true, 			// default is *false* by viewManager
 		'not_found_template' 		=> 'spec/404', 		// default is '404' by viewManager
         'display_exceptions' 		=> true, 			// default is *false* by viewManager
         'exception_template' 		=> 'spec/error', 	// default is 'error' by viewManager
+
 
         'template_map'			    => array(), 		// used as construct parameter for ViewResolver\TemplateMapResolver($map)
         'template_path_stack'		=> array(			// used as ->addPaths() method on ViewResolver\TemplatePathStack()
             APP_DIR_APPLICATION .DS. 'themes',
         ),
 
-        'layout' 					=> 'default', 		// default value is 'layouy/layout' by ViewManager
 
 		//'doctype'                 => '',              // if set used by doctype helper in ViewHelperManagerFactory service
 		//'base_path'			    => ''				// if set used by basePath helper in ViewHelperManagerFactory service elsewhere get from request
