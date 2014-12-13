@@ -15,7 +15,8 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "rayamedia/yima-base": "dev-master"
+        "rayamedia/yima-base": "dev-master",
+        "poirot/core": "dev-master"
     },
     "require-dev":
     {
