@@ -48,7 +48,7 @@ return array(
             ],
             # caching modules merged config
             'config_cache_enabled'  => false,
-            'cache_dir'    		   	=> APP_DIR_CACHE,
+            'cache_dir'    		   	=> APP_DIR_TEMP.'/cache',
             'config_cache_key' 	    => 'modulesMergedConfig_'.APP_PROFILE, // name of cache file
 
             # also these options can beign set
