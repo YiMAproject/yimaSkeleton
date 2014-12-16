@@ -9,6 +9,7 @@
 build/
 nbproject
 tmp/
+!_app/tmp
 
 composer.lock
 composer.json
