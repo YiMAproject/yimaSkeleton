@@ -9,7 +9,7 @@ use Zend\Mvc\Controller\AbstractActionController;
  *
  * note: you can put same controller/actions for Application Module
  *       like this that accessible from url:
- *       [basePath]/st-pages/:Controller/:action
+ *       [basePath]/application/:Controller/:action
  */
 class IndexController extends AbstractActionController
 {
@@ -22,7 +22,7 @@ class IndexController extends AbstractActionController
      * Test page action
      *
      * accessible from url:
-     *  [basePath]/st-pages/Index/test
+     *  [basePath]/application/index/test
      */
     public function testAction()
     {
