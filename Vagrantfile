@@ -5,8 +5,11 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "pnaderi/centos7-lamp"
-  config.vm.box_url = "https://vagrantcloud.com/pnaderi/boxes/centos7-lamp/versions/1/providers/virtualbox.box"
+  #config.vm.box = "pnaderi/centos7-lamp"
+  #config.vm.box_url = "https://vagrantcloud.com/pnaderi/boxes/centos7-lamp/versions/1/providers/virtualbox.box"
+
+  config.vm.box = "pnaderi/ubuntuserver14-lamp"
+  #config.vm.box_url = "https://vagrantcloud.com/pnaderi/boxes/ubuntuserver14-lamp/versions/1/providers/virtualbox.box"
 
   ##### INDIVIDUALS ############################################################
 
